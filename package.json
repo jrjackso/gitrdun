@@ -1,0 +1,23 @@
+{
+  "name": "gitrdun",
+  "version": "1.0.7",
+  "description": "A package manager for git repo dependencies",
+  "keywords": [
+    "git",
+    "repo",
+    "dependency",
+    "package",
+    "manager"
+  ],
+  "main": "gitrdun.js",
+  "bin": {
+    "gitrdun": "gitrdun.js",
+    "gitr": "gitrdun.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpipher/gitrdun.git"
+  },
+  "author": "jpipher",
+  "license": "ISC"
+}
