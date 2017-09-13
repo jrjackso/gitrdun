@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 var exec = require('child_process').execSync;
 var fs = require('fs');
 var path = require('path');
