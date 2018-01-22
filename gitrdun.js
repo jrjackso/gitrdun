@@ -7,7 +7,7 @@ var util = require('util');
 
 function Git() {
     this.clone = function (repo, dir) {
-        var cmd = util.format('git clone %s %s', repo, dir);
+        var cmd = util.format('git clone --depth 1 --no-single-branch %s %s', repo, dir);
         execute(cmd);
     };
 
