@@ -27,8 +27,14 @@ Git repo dependencies will be installed in configured directory.
     "dependencies": {
         "gitrdun": {
             "url": "https://github.com/jpipher/gitrdun.git",
-            "branch": "master"
+            "branch": "master",
+            "paths": [
+                "gitrdun.js",
+                "package.json"
+            ]
         }
     }
 }
 ```
+
+NOTE: If no "paths" node is specified for a repo, the entire repo will by kept

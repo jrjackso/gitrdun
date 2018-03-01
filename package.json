@@ -19,5 +19,8 @@
     "url": "https://github.com/jpipher/gitrdun.git"
   },
   "author": "jpipher",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "rimraf": "^2.6.2"
+  }
 }

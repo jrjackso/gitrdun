@@ -3,6 +3,7 @@
 var exec = require('child_process').execSync;
 var fs = require('fs');
 var path = require('path');
+var rimraf = require('rimraf');
 var util = require('util');
 
 function Git() {
@@ -51,8 +52,44 @@ function Installer(git) {
 
             git.checkout(repoConfig.branch, repoDir);
 
+            if (repoConfig.paths) {
+                this.clean(repoDir, repoConfig.paths);
+            }
+
             this.install(repoDir);
         }
+    };
+
+    this.clean = function(baseDir, pathsToKeep) {
+        var pathsToKeepLowerCase = pathsToKeep.map(function(path) { return path.toLowerCase(); });
+        var subPaths = fs.readdirSync(baseDir);
+
+        for (var i in subPaths) {
+            var subPath = subPaths[i].toLowerCase();
+            var fullPath = path.join(baseDir, subPath);
+            var isGitFolder = subPath == '.git';
+            var shouldDelete = !isSubPathInList(subPath, pathsToKeepLowerCase) && !isGitFolder;
+
+            if (shouldDelete) {
+                rimraf.sync(fullPath);
+            }
+            else if (fs.lstatSync(fullPath).isDirectory() && !isGitFolder) {
+                var subDir = path.join(baseDir, subPath);
+                this.clean(subDir, pathsToKeep);
+            }
+        }
+    };
+
+    var isSubPathInList = function(path, list) {
+        for (var i in list) {
+            var item = list[i];
+
+            if (item.indexOf(path) >= 0) {
+                return true;
+            }
+        }
+
+        return false;
     };
 }
 
