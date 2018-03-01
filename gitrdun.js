@@ -62,18 +62,25 @@ function Installer(git) {
 
     this.clean = function(baseDir, pathsToKeep) {
         var pathsToKeepLowerCase = pathsToKeep.map(function(path) { return path.toLowerCase(); });
+        pathsToKeepLowerCase.push('.git');
         var subPaths = fs.readdirSync(baseDir);
 
         for (var i in subPaths) {
             var subPath = subPaths[i].toLowerCase();
             var fullPath = path.join(baseDir, subPath);
-            var isGitFolder = subPath == '.git';
-            var shouldDelete = !isSubPathInList(subPath, pathsToKeepLowerCase) && !isGitFolder;
+            var isKeptPath = pathsToKeepLowerCase.indexOf(subPath.toLowerCase()) >= 0;
 
-            if (shouldDelete) {
+            if (isKeptPath) {
+                continue;
+            }
+
+            var hasKeptSubPaths = isSubPathInList(subPath, pathsToKeepLowerCase);
+            var isDirectory = fs.lstatSync(fullPath).isDirectory();
+
+            if (!hasKeptSubPaths) {
                 rimraf.sync(fullPath);
             }
-            else if (fs.lstatSync(fullPath).isDirectory() && !isGitFolder) {
+            else if (isDirectory) {
                 var subDir = path.join(baseDir, subPath);
                 this.clean(subDir, pathsToKeep);
             }
@@ -84,7 +91,7 @@ function Installer(git) {
         for (var i in list) {
             var item = list[i];
 
-            if (item.indexOf(path) >= 0) {
+            if (item.indexOf(path.toLowerCase()) >= 0) {
                 return true;
             }
         }
