@@ -1,0 +1,14 @@
+{
+    "directory": "lib_gitrdun",
+    "dependencies": {
+        "gitrdun": {
+            "url": "https://github.com/jpipher/gitrdun.git",
+            "branch": "master",
+            "single": false,
+            "paths": [
+                "gitrdun.js",
+                "package.json"
+            ]
+        }
+    }
+}
