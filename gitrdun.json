@@ -4,7 +4,7 @@
         "gitrdun": {
             "url": "https://github.com/jpipher/gitrdun.git",
             "branch": "master",
-            "single": false,
+            "shallow": false,
             "paths": [
                 "gitrdun.js",
                 "package.json"

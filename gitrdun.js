@@ -56,7 +56,7 @@ function Installer(git) {
                 this.clean(repoDir, repoConfig.paths);
             }
 
-            if (!repoConfig.single) {
+            if (!repoConfig.shallow) {
                 this.install(repoDir);
             }
         }
