@@ -31,13 +31,7 @@ function Installer(git) {
             return;
         }
 
-        process.chdir(dir);
-
         var config = JSON.parse(fs.readFileSync(gitrdunJson));
-
-        if (config.install) {
-            execute(config.install);
-        }
 
         for (var repoName in config.dependencies) {
             var repoConfig = config.dependencies[repoName];
@@ -52,15 +46,19 @@ function Installer(git) {
 
             git.checkout(repoConfig.branch, repoDir);
 
-            if (repoConfig.install) {
-                process.chdir(repoDir);
-                execute(repoConfig.install);
-                process.chdir(dir);
-            }
-
             if (!repoConfig.shallow) {
                 this.install(repoDir);
             }
+
+            if (repoConfig.install) {
+                process.chdir(repoDir);
+                execute(repoConfig.install);
+            }
+        }
+
+        if (config.install) {
+            process.chdir(dir);
+            execute(config.install);
         }
     };
 }

@@ -24,20 +24,19 @@ Git repo dependencies will be installed in configured directory.
 ```json
 {
     "directory": "lib_gitrdun",
+    "install": "pwd",
     "dependencies": {
         "gitrdun": {
             "url": "https://github.com/jpipher/gitrdun.git",
             "branch": "master",
-            "single": false,
-            "paths": [
-                "gitrdun.js",
-                "package.json"
-            ]
+            "shallow": true,
+            "install": "pwd"
         }
     }
 }
 ```
 
 NOTES:
-* If no "paths" node is specified for a repo, the entire repo will be kept.
-* Set "single" to true if you do not want to recursively install with gitrdun
+* The "install" script will be run after dependencies are fetched from git
+* An "install" script can be defined for a dependency and will be run after the dependency has been fetched from git
+* Set "shallow" to true if you do not want to recursively install with gitrdun

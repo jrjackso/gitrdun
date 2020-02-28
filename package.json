@@ -1,6 +1,6 @@
 {
   "name": "gitrdun",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "A package manager for git repo dependencies",
   "keywords": [
     "git",
