@@ -1,14 +1,12 @@
 {
     "directory": "lib_gitrdun",
+    "install": "pwd",
     "dependencies": {
         "gitrdun": {
             "url": "https://github.com/jpipher/gitrdun.git",
             "branch": "master",
-            "shallow": false,
-            "paths": [
-                "gitrdun.js",
-                "package.json"
-            ]
+            "shallow": true,
+            "install": "pwd"
         }
     }
 }
